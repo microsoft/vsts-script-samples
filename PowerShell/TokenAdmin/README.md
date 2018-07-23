@@ -2,7 +2,7 @@ The `Revoke-VSTSPATsJWTs.ps1` script will revoke all the PATs for the selected U
 
 Enter the UPN of each user from whom you want to revoke all PATs in a text file in your local file system, one per line. 
 
-[Create PAT in VSTS](https://docs.microsoft.com/en-us/vsts/organizations/accounts/use-personal-access-tokens-to-authenticate?view=vsts#create-personal-access-tokens-to-authenticate-access) by following these steps: 
+[Create a new PAT in VSTS](https://docs.microsoft.com/en-us/vsts/organizations/accounts/use-personal-access-tokens-to-authenticate?view=vsts#create-personal-access-tokens-to-authenticate-access) by following these steps: 
 1. Sign in to your VSTS account (`https://{your_vsts_account}.visualstudio.com`). 
 2. From the top right of your home page, select your `Profile Picture` and go to `Security`. 
 3. On the left pane select `Personal access tokens` and in the center pane select `Add`. 
