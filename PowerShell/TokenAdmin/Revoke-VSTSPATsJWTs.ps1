@@ -21,7 +21,7 @@ $pageSize = 990
 Write-Host 'Revoking JWTs...'
 $uri = "https://$VSTSAccountName.vssps.visualstudio.com/_apis/tokenAdmin/revocationRules?api-version=5.0-preview.1"
 $params = New-Object psobject -property @{
-    'scopes' = 'app_token vso.packaging vso.packaging_write vso.packaging_manage'
+    'scopes' = 'vso.packaging vso.packaging_write vso.packaging_manage'
     'createdBefore' = '2018-07-12T12:30:00.000Z'
 } | ConvertTo-Json
 $r = Invoke-WebRequest -Method Post -Uri $uri -Headers $headers -Body $params -ContentType 'application/json'
