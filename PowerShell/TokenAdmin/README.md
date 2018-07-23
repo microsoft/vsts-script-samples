@@ -20,4 +20,4 @@ For example:
 .\Revoke-VSTSPATsJWTs.ps1 -VSTSAccountName 'fabrikam' -PAT 'ddn37i2piwsficsk6zrr5vjbac3zr3egq2s3gieogbrgym32myqa' -UPNsFileLocation '.\UPNs.txt'
 ```
 
-If the UPN you used to create the PAT is in the UPNs file, that PAT will also be removed. 
+If the UPN you used to create the PAT is in the UPNs file, your newly created PAT will also be removed. 
