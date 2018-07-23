@@ -1,5 +1,3 @@
-#.\revoke_pats_jwts_basic.ps1 -VSTSAccountName andresgallo36test1 -PAT 'gc3jsnnf7dlxcds7lw3it5xyrjgw3pjdc4ytwhsla7eovgopm47a' -UPNsFileLocation '.\upns.txt'
-
 param(
     [parameter(Mandatory=$true)]
     [string] $VSTSAccountName,
