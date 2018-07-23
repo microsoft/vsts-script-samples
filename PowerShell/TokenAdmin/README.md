@@ -8,8 +8,9 @@ Enter the UPN of each user from whom you want to revoke all PATs in a text file 
 3. On the left pane select `Personal access tokens` and in the center pane select `Add`. 
 4. Enter a `Description` for your new PAT, select the shortest expiration period for the `Expires In` field, and select `{your_vsts_account}` in the `Accounts` field. 
 5. For `Authorized Scopes` choose `All scopes` and select `Create`. 
+6. Copy the PAT text displayed in the list of tokens. 
 
-Then you can use this PowerShell script with the following parameters: 
+Then you can use the PowerShell script with the following parameters: 
 ```PowerShell
 .\Revoke-VSTSPATsJWTs.ps1 -VSTSAccountName '{your_vsts_account}' -PAT '{your_new_pat}' -UPNsFileLocation '{location_of_your_UPNs_file}'
 ```
