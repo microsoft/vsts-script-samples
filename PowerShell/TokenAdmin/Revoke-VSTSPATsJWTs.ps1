@@ -47,7 +47,6 @@ $descriptors = do{
 } while($continuationToken)
 Write-Host "Selected $(($descriptors | Measure-Object).Count) user(s)"
 
-
 Write-Host 'Getting list of PATs from selected users...'
 $authorizationIds = $descriptors | %{
     $baseUri = "https://$VSTSAccountName.vssps.visualstudio.com/_apis/tokenAdmin/personalAccessTokens/$_/?"
