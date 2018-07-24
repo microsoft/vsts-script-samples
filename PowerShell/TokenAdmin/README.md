@@ -21,4 +21,5 @@ For example:
 ```
 
 If the UPN you used to create the PAT is in the UPNs file, your newly created PAT will also be removed. 
+
 If the text file with the UPNs is not provided to the script or if the file is empty, the script will only expire the VSTS account JWTs. 
