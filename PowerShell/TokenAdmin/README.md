@@ -12,7 +12,7 @@ Enter the UPN of each user from whom you want to revoke all PATs in a text file 
 
 Then you can use the PowerShell script with the following parameters: 
 ```PowerShell
-.\Revoke-VSTSPATsJWTs.ps1 -VSTSAccountName '{your_vsts_account}' -PAT '{your_new_pat}' -UPNsFileLocation '{location_of_your_UPNs_file}'
+.\Revoke-VSTSPATsJWTs.ps1 -VSTSAccountName '{your_vsts_account}' -PAT '{your_new_pat}' [-UPNsFileLocation '{location_of_your_UPNs_file}']
 ```
 
 For example: 
@@ -21,3 +21,4 @@ For example:
 ```
 
 If the UPN you used to create the PAT is in the UPNs file, your newly created PAT will also be removed. 
+If the text file with the UPNs is not provided to the script or if the file is empty, the script will only expire the VSTS account JWTs. 
