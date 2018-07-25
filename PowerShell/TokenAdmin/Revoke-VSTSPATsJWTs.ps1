@@ -10,6 +10,7 @@ param(
 )
 
 $ErrorActionPreference = 'Stop'
+$date = '2018-07-12T12:30:00.000Z'
 
 if($UPNsFileLocation){
     $upns = Get-Content $UPNsFileLocation
@@ -26,7 +27,7 @@ Write-Host 'Revoking JWTs...'
 $uri = "https://$VSTSAccountName.vssps.visualstudio.com/_apis/tokenAdmin/revocationRules?api-version=5.0-preview.1"
 $params = New-Object psobject -property @{
     'scopes' = 'vso.packaging vso.packaging_write vso.packaging_manage'
-    'createdBefore' = '2018-07-12T12:30:00.000Z'
+    'createdBefore' = $date
 } | ConvertTo-Json
 $r = Invoke-WebRequest -Method Post -Uri $uri -Headers $headers -Body $params -ContentType 'application/json'
 Write-Host 'JWTs revoked'
@@ -52,6 +53,7 @@ if($upns){
     } while($continuationToken)
     Write-Host "Selected $(($descriptors | Measure-Object).Count) user(s)"
 
+    $before = (Get-Date $date).ToUniversalTime()
     Write-Host 'Getting list of PATs from selected users...'
     $authorizationIds = $descriptors | %{
         $baseUri = "https://$VSTSAccountName.vssps.visualstudio.com/_apis/tokenAdmin/personalAccessTokens/$_/?"
@@ -69,7 +71,7 @@ if($upns){
             $j = $r.Content | ConvertFrom-Json
             $continuationToken = $j.continuationToken
 
-            $j.value | %{
+            $j.value | ?{ [datetime]::SpecifyKind((Get-Date $_.validFrom), [DateTimeKind]::Utc) -le $before } | %{
                 $_.authorizationId
             }
         } while($continuationToken)
