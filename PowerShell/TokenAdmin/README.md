@@ -1,8 +1,8 @@
-The `Revoke-VSTSPATsJWTs.ps1` script will revoke all the PATs created before `2018-07-12T12:30:00.000Z` for the selected UPNs that have access to a VSTS account and will also expire all the JWTs for the VSTS account created before `2018-07-12T12:30:00.000Z` that have any of the `vso.packaging vso.packaging_write vso.packaging_manage` scopes. 
+The `Revoke-VSTSPATsJWTs.ps1` script will revoke all the PATs created before `2018-07-12T12:30:00.000Z` for the selected UPNs that have access to the specified VSTS account and will also expire all the JWTs created before `2018-07-12T12:30:00.000Z` that have any of the `vso.packaging`, `vso.packaging_write` or `vso.packaging_manage` scopes, or a global scope, for the specified VSTS account. 
 
-Enter the UPN of each user from whom you want to revoke all PATs in a text file in your local file system, one per line. 
+To specify the list of UPNs, enter the UPN of each user from whom you want to revoke all PATs in a text file in your local file system, one per line. 
 
-[Create a new PAT in VSTS](https://docs.microsoft.com/en-us/vsts/organizations/accounts/use-personal-access-tokens-to-authenticate?view=vsts#create-personal-access-tokens-to-authenticate-access) by following these steps: 
+The script uses the VSTS Graph and TokenAdmin REST APIs to list PATs, to revoke JWTs and to disable PATs. To authenticate against these APIs, the script needs a valid PAT with all the scopes for, at least, the VSTS account provided to the script. To [create a new PAT in VSTS](https://docs.microsoft.com/en-us/vsts/organizations/accounts/use-personal-access-tokens-to-authenticate?view=vsts#create-personal-access-tokens-to-authenticate-access) with these properties, you can follow these steps: 
 1. Sign in to your VSTS account (`https://{your_vsts_account}.visualstudio.com`). 
 2. From the top right of your home page, select your `Profile Picture` and go to `Security`. 
 3. On the left pane select `Personal access tokens` and in the center pane select `Add`. 
