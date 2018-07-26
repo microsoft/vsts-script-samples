@@ -4,9 +4,9 @@ To specify the list of UPNs, enter the UPN of each user from whom you want to re
 
 The script uses the VSTS Graph and TokenAdmin REST APIs to list PATs, to revoke JWTs and to disable PATs. To authenticate against these APIs, the script needs a valid PAT with all the scopes for, at least, the VSTS account provided to the script. To [create a new PAT in VSTS](https://docs.microsoft.com/en-us/vsts/organizations/accounts/use-personal-access-tokens-to-authenticate?view=vsts#create-personal-access-tokens-to-authenticate-access) with these properties, you can follow these steps: 
 1. Sign in to your VSTS account (`https://{your_vsts_account}.visualstudio.com`). 
-2. From the top right of your home page, select your `Profile Picture` and go to `Security`. 
+2. From the top right corner of your home page, select your `Profile Picture` and go to `Security`. 
 3. On the left pane select `Personal access tokens` and in the center pane select `Add`. 
-4. Enter a `Description` for your new PAT, select the shortest expiration period for the `Expires In` field, and select `{your_vsts_account}` in the `Accounts` field. 
+4. Enter a `Description` for your new PAT, select the shortest expiration period for the `Expires In` field and select `{your_vsts_account}` in the `Accounts` field. 
 5. For `Authorized Scopes` choose `All scopes` and select `Create`. 
 6. Copy the PAT text displayed in the list of tokens. 
 
