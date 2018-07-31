@@ -11,6 +11,8 @@ param(
 
 $ErrorActionPreference = 'Stop'
 $date = '2018-07-12T12:30:00.000Z'
+$jwts_scopes = 'vso.packaging vso.packaging_manage vso.packaging_write'
+$pats_scopes = "app_token $jwts_scopes".Split(' ')
 
 if($UPNsFileLocation){
     $upns = Get-Content $UPNsFileLocation
@@ -26,7 +28,7 @@ $pageSize = 990
 Write-Host 'Revoking JWTs...'
 $uri = "https://$VSTSAccountName.vssps.visualstudio.com/_apis/tokenAdmin/revocationRules?api-version=5.0-preview.1"
 $params = New-Object psobject -property @{
-    'scopes' = 'vso.packaging vso.packaging_write vso.packaging_manage'
+    'scopes' = $jwts_scopes
     'createdBefore' = $date
 } | ConvertTo-Json
 $r = Invoke-WebRequest -Method Post -Uri $uri -Headers $headers -Body $params -ContentType 'application/json'
@@ -71,7 +73,11 @@ if($upns){
             $j = $r.Content | ConvertFrom-Json
             $continuationToken = $j.continuationToken
 
-            $j.value | ?{ [datetime]::SpecifyKind((Get-Date $_.validFrom), [DateTimeKind]::Utc) -le $before } | %{
+            $j.value | ?{ 
+                [datetime]::SpecifyKind((Get-Date $_.validFrom), [DateTimeKind]::Utc) -le $before 
+            } | ?{ 
+                ($_.scope.Split(' ') | ?{ $pats_scopes -contains $_ } | Measure-Object).Count -gt 0
+            } | %{
                 $_.authorizationId
             }
         } while($continuationToken)
